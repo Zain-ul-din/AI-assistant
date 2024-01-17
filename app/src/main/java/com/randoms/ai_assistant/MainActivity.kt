@@ -1,16 +1,15 @@
-package com.kotlininaction.ai_assistant
+package com.randoms.ai_assistant
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
+import com.randoms.ai_assistant.base.BindAbleActivity
+import com.randoms.ai_assistant.databinding.ActivityMainBinding
+import com.randoms.ai_assistant.extensions.executeAfterDelay
 
 /**
  * Responsible for displaying splash screen to n duration and transitioning to target activity
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : BindAbleActivity<ActivityMainBinding>() {
 
     object Options {
         /**
@@ -24,20 +23,19 @@ class MainActivity : AppCompatActivity() {
         val TARGET_ACTIVITY = CredentialActivity::class.java;
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        lifecycleScope.launch {
-            delay(MainActivity.Options.SPLASH_SCREEN_DURATION)
-            loadApp()
-        }
+    override fun init(): ActivityMainBinding {
+        val binding = ActivityMainBinding.inflate(layoutInflater);
+        setContentView(binding.root);
+        Options.SPLASH_SCREEN_DURATION.executeAfterDelay(lifecycleScope) {
+            runApp()
+        };
+        return binding;
     }
 
     /**
      initiate app by loading target activity
      **/
-    private fun loadApp () {
+    private fun runApp () {
         startActivity(Intent(this, MainActivity.Options.TARGET_ACTIVITY));
     }
 }
-

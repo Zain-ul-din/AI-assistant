@@ -4,16 +4,15 @@ plugins {
 }
 
 android {
-    namespace = "com.kotlininaction.ai_assistant"
+    namespace = "com.randoms.ai_assistant"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.kotlininaction.ai_assistant"
+        applicationId = "com.randoms.ai_assistant"
         minSdk = 24
         targetSdk = 34
         versionCode = 1
         versionName = "1.0"
-
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -26,10 +25,16 @@ android {
             )
         }
     }
+
+    buildFeatures {
+        viewBinding = true
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+
     kotlinOptions {
         jvmTarget = "1.8"
     }

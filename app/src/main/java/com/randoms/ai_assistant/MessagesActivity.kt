@@ -13,3 +13,4 @@ class MessagesActivity : BindAbleActivity<ActivityChatBinding>() {
     }
 }
 
+

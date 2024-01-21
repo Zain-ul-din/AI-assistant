@@ -13,5 +13,8 @@ abstract class BindAbleActivity<T>: AppCompatActivity() {
     ) {
         super.onCreate(savedInstanceState);
         binding = init()
+        start()
     }
+
+    open fun start() {}
 }

@@ -20,7 +20,7 @@ class MainActivity : BindAbleActivity<ActivityMainBinding>() {
         /**
          * Specifies the target activity to load after splash screen time out
          */
-        val TARGET_ACTIVITY = CredentialActivity::class.java;
+        val TARGET_ACTIVITY = HomeActivity::class.java;
     }
 
     override fun init(): ActivityMainBinding {

@@ -12,6 +12,7 @@ import com.randoms.ai_assistant.databinding.ActivityCredentialBinding
 import com.randoms.ai_assistant.db.ChatDB
 import com.randoms.ai_assistant.db.CredentialDB
 import com.randoms.ai_assistant.entities.CredentialEntity
+import com.randoms.ai_assistant.util.UrlUtils
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -31,6 +32,7 @@ class CredentialActivity : BindAbleActivity<ActivityCredentialBinding>() {
         handleRouting()
         setupRepository()
         observe()
+        handleLoadUrls()
     }
 
     private fun setupRepository() {
@@ -84,6 +86,16 @@ class CredentialActivity : BindAbleActivity<ActivityCredentialBinding>() {
                     )
                 }
             }
+        }
+    }
+
+    private fun handleLoadUrls () {
+        binding!!.getGeminiKey.setOnClickListener {
+            UrlUtils.openUrl(this, "https://makersuite.google.com/app/apikey")
+        }
+
+        binding!!.getOpenAiKey.setOnClickListener {
+            UrlUtils.openUrl(this, "https://platform.openai.com/account/api-keys")
         }
     }
 }

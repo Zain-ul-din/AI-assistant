@@ -19,4 +19,8 @@ class ChatRepository (private val chatDao: ChatDao) {
     suspend fun update(chat: ChatEntity) {
         chatDao.update(chat)
     }
+
+    fun getChatById(id: String): LiveData<ChatEntity> {
+        return chatDao.getChatById(id)
+    }
 }

@@ -3,7 +3,7 @@ package com.randoms.ai_assistant.entities
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
+@Entity(tableName = "message_table")
 data class MessageEntity (
     @PrimaryKey(autoGenerate = true)
     val id: Long,

@@ -57,6 +57,10 @@ class HomeActivity : BindAbleActivity<ActivityHomeBinding>(),
         binding!!.credentialsBtn.setOnClickListener {
             startActivity(Intent(this, CredentialActivity::class.java));
         }
+
+        binding!!.creditBtn.setOnClickListener {
+            startActivity(Intent(this, CreditActivity::class.java))
+        }
     }
 
     override fun onChatDeleteClick(ele: ChatEntity) {

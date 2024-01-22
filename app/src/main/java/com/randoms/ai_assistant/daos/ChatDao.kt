@@ -24,4 +24,7 @@ interface ChatDao {
 
     @Query("select * from chat_table")
     fun getAll(): LiveData<List<ChatEntity>>
+
+    @Query("SELECT * FROM chat_table WHERE title = :id")
+    fun getChatById(id: String): LiveData<ChatEntity>
 }

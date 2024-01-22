@@ -2,16 +2,66 @@ package com.randoms.ai_assistant.lib
 
 
 import retrofit2.Call
-import retrofit2.http.GET
+import retrofit2.http.Body
+import retrofit2.http.Header
+import retrofit2.http.POST
+import retrofit2.http.Query
 
-data class Course(val sections: List<String>)
-data class Semester(val courses: Map<String, Course>)
-data class ApiResponse(val semesters: Map<String, Semester>)
+data class SafetyRating(
+    val category: String,
+    val probability: String
+)
+
+data class ContentPart(
+    val text: String
+)
+
+data class Parts(
+    val parts: List<ContentPart>,
+    val role: String
+)
+
+data class Content(
+    val parts: List<ContentPart>,
+    val role: String
+)
+
+data class Candidate(
+    val content: Content,
+    val finishReason: String,
+    val index: Int,
+    val safetyRatings: List<SafetyRating>
+)
+
+data class PromptFeedback(
+    val safetyRatings: List<SafetyRating>
+)
+
+data class GenerateContentResponse(
+    val candidates: List<Candidate>,
+    val promptFeedback: PromptFeedback
+)
+
+data class RequestBody(
+    val contents: List<ContentRequest>
+)
+
+data class ContentRequest(
+    val parts: List<ContentPartRequest>
+)
+
+data class ContentPartRequest(
+    val text: String
+)
+
 
 interface ApiService {
-    @GET("api/public/metadata?apikey=01HM4E10J21S2K1T32WXB4T4AB")
-    fun getMetaData(): Call<ApiResponse>
+
+    @POST("models/gemini-pro:generateContent")
+    fun generateContent(
+        @Header("Content-Type") contentType: String = "application/json",
+        @Query("key") apiKey: String,
+        @Body requestBody: RequestBody
+    ): Call<GenerateContentResponse>
+
 }
-
-
-

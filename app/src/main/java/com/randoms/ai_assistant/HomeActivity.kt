@@ -1,7 +1,6 @@
 package com.randoms.ai_assistant
 
 import android.content.Intent
-import android.util.Log
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.randoms.ai_assistant.Repositories.ChatRepository
@@ -9,20 +8,15 @@ import com.randoms.ai_assistant.base.BindAbleActivity
 import com.randoms.ai_assistant.databinding.ActivityHomeBinding
 import com.randoms.ai_assistant.db.ChatDB
 import com.randoms.ai_assistant.entities.ChatEntity
-import com.randoms.ai_assistant.lib.ApiResponse
-import com.randoms.ai_assistant.lib.GeminiAPIClient
-import com.randoms.ai_assistant.lib.GeminiClient
 import com.randoms.ai_assistant.views.ChatAdapter
+import com.randoms.ai_assistant.views.OnChatClickListener
 import com.randoms.ai_assistant.views.OnChatDeleteClickListener
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import retrofit2.Call
-import retrofit2.Callback
-import retrofit2.Response
 
 class HomeActivity : BindAbleActivity<ActivityHomeBinding>(),
-    OnChatDeleteClickListener {
+    OnChatDeleteClickListener, OnChatClickListener {
 
     private lateinit var chatAdapter: ChatAdapter
     private lateinit var chatRepository: ChatRepository
@@ -49,16 +43,9 @@ class HomeActivity : BindAbleActivity<ActivityHomeBinding>(),
         chatRepository.allChat.observe(this) {
             chatAdapter = ChatAdapter(it)
             chatAdapter.setOnChatDeleteClickListener(thisContext)
+            chatAdapter.setOnChatClickListener(thisContext)
             binding?.chatView?.layoutManager = LinearLayoutManager(this)
             binding?.chatView?.adapter = chatAdapter
-        }
-    }
-
-    override fun onChatDeleteClick(ele: ChatEntity) {
-        lifecycleScope.launch {
-            withContext(Dispatchers.IO) {
-                chatRepository.delete(ele)
-            }
         }
     }
 
@@ -71,4 +58,19 @@ class HomeActivity : BindAbleActivity<ActivityHomeBinding>(),
             startActivity(Intent(this, CredentialActivity::class.java));
         }
     }
+
+    override fun onChatDeleteClick(ele: ChatEntity) {
+        lifecycleScope.launch {
+            withContext(Dispatchers.IO) {
+                chatRepository.delete(ele)
+            }
+        }
+    }
+
+    override fun onChatClick(element: ChatEntity) {
+        val intent = Intent(this, MessagesActivity::class.java);
+        intent.putExtra("ChatKey", element.title);
+        startActivity(intent);
+    }
 }
+

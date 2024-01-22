@@ -14,12 +14,21 @@ interface OnChatDeleteClickListener {
     fun onChatDeleteClick(element: ChatEntity)
 }
 
+interface OnChatClickListener {
+    fun onChatClick(element: ChatEntity)
+}
+
 class ChatAdapter (private val list: List<ChatEntity>):
     RecyclerView.Adapter<ChatAdapter.ViewHolder>() {
 
     class  ViewHolder(val view: View): RecyclerView.ViewHolder(view)
 
     private var onChatDeleteClickListener: OnChatDeleteClickListener? = null
+    private var onChatClickListener: OnChatClickListener? = null
+
+    fun setOnChatClickListener(listener: OnChatClickListener) {
+        this.onChatClickListener = listener
+    }
 
     fun setOnChatDeleteClickListener(listener: OnChatDeleteClickListener) {
         this.onChatDeleteClickListener = listener
@@ -38,6 +47,10 @@ class ChatAdapter (private val list: List<ChatEntity>):
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val chatEntity = list[position]
         val view = holder.view
+
+        view.setOnClickListener {
+            onChatClickListener?.onChatClick(chatEntity)
+        }
 
         view.findViewById<ImageView>(R.id.chat_bg).setImageResource(R.drawable.chat_bg)
 

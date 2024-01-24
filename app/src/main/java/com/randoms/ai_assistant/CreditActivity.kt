@@ -24,7 +24,7 @@ class CreditActivity : BindAbleActivity<ActivityCreditBinding>() {
         }
 
         binding!!.githubIcon.setOnClickListener {
-            UrlUtils.openUrl(this, "https://github.com/Zain-ul-din/whatsapp-ai-bot");
+            UrlUtils.openUrl(this, "https://github.com/Zain-ul-din/AI-assistant");
         }
     }
 }

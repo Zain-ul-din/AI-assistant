@@ -23,5 +23,3 @@ AI Assistant App build using kotlin for my university App development course pro
 <img src="./static/chat_ss.png" />
 <img src="./static/credential_ss.png" />
 
-## License
-

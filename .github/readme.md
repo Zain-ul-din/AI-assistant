@@ -20,7 +20,7 @@ AI Assistant App build using kotlin for my university App development course pro
 ## Screen Shots
 
 <span>
-<img src="./static/splash_ss.png" width="33%" height="720" />
-<img src="./static/credential_ss.png"  width="33%"  height="720" />
-<img src="./static/chat_ss.png" width="33%"  height="720" />
+<img src="./static/splash_ss.png" width="30%"  />
+<img src="./static/credential_ss.png"  width="30%"   />
+<img src="./static/chat_ss.png" width="30%"   />
 </span>
